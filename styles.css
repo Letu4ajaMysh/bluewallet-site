@@ -1,0 +1,45 @@
+/* BlueWallet — styles.css
+   Place assets (hero.jpg, hero-video.mp4, click.mp3) into /assets
+*/
+:root{
+  --accent-1:#00c8ff; --accent-2:#0066ff;
+  --glass:rgba(255,255,255,0.04);
+  --soft:#dff6ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial;color:var(--soft);background:#000814}
+.hero-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-10;filter:brightness(.45) saturate(1.05)}
+#gradient{position:fixed;inset:0;z-index:-8;background:linear-gradient(120deg,#001f3f,#003766,#0056aa,#002a66);background-size:400% 400%;animation:grad 18s linear infinite;mix-blend-mode:screen;filter:blur(24px) saturate(120%)}
+@keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#particles{position:fixed;inset:0;z-index:-7}
+.stage{max-width:1200px;margin:40px auto;padding:48px;display:flex;gap:36px;align-items:center;min-height:calc(100vh - 80px)}
+.visual{flex:1 1 480px;display:flex;align-items:center;justify-content:center;min-height:360px;border-radius:20px;background:linear-gradient(180deg,rgba(0,20,40,0.25),rgba(0,10,20,0.35));box-shadow:0 18px 60px rgba(0,40,80,0.35)}
+.wallet-wrap{width:420px;height:300px;perspective:1600px;display:flex;align-items:center;justify-content:center}
+.wallet{width:380px;height:260px;border-radius:20px;position:relative;transform-style:preserve-3d;background:linear-gradient(135deg,#022040,#004a9f);box-shadow:0 30px 70px rgba(0,60,140,0.45),inset 0 -6px 18px rgba(0,0,0,0.25);transition:transform .15s cubic-bezier(.2,.9,.2,1)}
+.wallet .img{position:absolute;inset:14px;border-radius:12px;overflow:hidden;transform:translateZ(40px) scale(1.02)}
+.wallet .img img{width:100%;height:100%;object-fit:cover;display:block}
+.wallet .gloss{position:absolute;left:-40%;top:0;height:100%;width:40%;background:linear-gradient(90deg,rgba(255,255,255,0.14),rgba(255,255,255,0.02));transform:skewX(-20deg) translateZ(60px);mix-blend-mode:overlay;pointer-events:none}
+.wallet-shadow{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);width:420px;height:56px;filter:blur(30px);opacity:.45}
+.panel{flex:1 1 480px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:20px;padding:32px;backdrop-filter:blur(6px) saturate(120%);box-shadow:0 10px 40px rgba(0,80,160,0.18);border:1px solid rgba(255,255,255,0.04)}
+h1{font-family:'Playfair Display',serif;font-size:40px;margin:0 0 14px;letter-spacing:-0.02em;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin:0 0 22px;color:#cfeeff;font-size:18px;max-width:46ch}
+.price{display:inline-block;margin:12px 0 22px;font-weight:700;color:#bfe9ff}
+.ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;font-weight:700;border:none;cursor:pointer;text-decoration:none;color:#021428;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 30px rgba(0,140,255,0.18);transition:transform .18s ease,box-shadow .18s}
+.btn.ghost{background:transparent;color:var(--soft);border:1px solid rgba(255,255,255,0.06);box-shadow:none}
+.btn:active{transform:translateY(2px) scale(.995)}
+.meta{display:flex;gap:16px;align-items:center;margin-top:18px;color:#9fcff4;font-size:14px}
+.badge{background:linear-gradient(90deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));padding:10px 12px;border-radius:10px;font-weight:700;color:#dff6ff}
+.vip{margin-left:auto;color:#9fdaff}
+.foot{margin-top:18px;color:rgba(200,230,255,0.28);font-size:14px}
+
+/* modal */
+.modal-back{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,8,20,0.6);z-index:40}
+.modal{width:min(720px,92%);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.04)}
+.modal h2{margin:0 0 8px;color:#dff6ff}
+.form-row{display:flex;gap:12px;margin-top:12px}
+.form-row input, textarea{flex:1;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--soft);outline:none}
+.actions{display:flex;gap:12px;margin-top:18px;justify-content:flex-end}
+
+/* responsive */
+@media(max-width:1000px){.stage{flex-direction:column;padding:28px;gap:20px}.wallet-wrap{transform:scale(.92)}h1{font-size:32px;text-align:center}.panel{padding:18px}}
