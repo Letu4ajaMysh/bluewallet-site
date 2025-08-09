@@ -1,50 +1,363 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blue Wallet — премиум кошелек</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="manifest.json" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blue Wallet - Визитка</title>
+<style>
+  /* Сброс и базовые стили */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #001f4d 0%, #003366 100%);
+    color: #d0e8ff;
+    overflow-x: hidden;
+  }
+  #particles {
+    position: fixed;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  header {
+    position: relative;
+    z-index: 10;
+    padding: 2rem;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.3rem;
+    background: linear-gradient(90deg, #3399ff, #00ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  header p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-top: 0;
+  }
+  #wallet-container {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+    margin: 2rem auto 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 153, 255, 0.6);
+    background: #011c3f;
+    position: relative;
+    z-index: 10;
+  }
+  video#hero-video {
+    display: block;
+    max-width: 90vw;
+    margin: 2rem auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #00bfff;
+    z-index: 10;
+    position: relative;
+  }
+  .phone {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 3rem;
+    letter-spacing: 2px;
+    color: #33ccff;
+    text-shadow: 0 0 10px #33ccff;
+    user-select: all;
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
+  }
+  .phone:hover {
+    color: #00eaff;
+    text-shadow: 0 0 20px #00eaff;
+  }
+  button#orderBtn {
+    display: block;
+    margin: 0 auto 3rem;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00bfff;
+    transition: background 0.3s ease;
+    user-select: none;
+    z-index: 10;
+    position: relative;
+  }
+  button#orderBtn:hover {
+    background: linear-gradient(45deg, #00d4ff, #007bff);
+  }
+
+  /* Модальное окно */
+  #orderModal {
+    position: fixed;
+    top:0; left:0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+  }
+  #orderModal.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  #orderModal .modal-content {
+    background: #02264d;
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 0 0 30px #00cfff;
+    position: relative;
+    color: #cceeff;
+  }
+  #orderModal h2 {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    background: linear-gradient(90deg, #33ccff, #0099ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  #orderModal label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  #orderModal input[type="text"], #orderModal input[type="tel"] {
+    width: 100%;
+    padding: 0.5rem 0.8rem;
+    margin-bottom: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background: #004080;
+    color: #d0e8ff;
+    box-shadow: inset 0 0 6px #007bff;
+    transition: box-shadow 0.3s ease;
+  }
+  #orderModal input[type="text"]:focus, #orderModal input[type="tel"]:focus {
+    box-shadow: inset 0 0 12px #00d4ff;
+  }
+  #orderModal button {
+    width: 100%;
+    padding: 0.7rem 0;
+    background: #0099ff;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00bfff;
+    transition: background 0.3s ease;
+  }
+  #orderModal button:hover {
+    background: #00d4ff;
+  }
+  #orderModal .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.5rem;
+    color: #33ccff;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.3s ease;
+  }
+  #orderModal .close-btn:hover {
+    color: #00eaff;
+  }
+</style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
 
-  <main class="stage">
-    <section class="visual">
-      <video autoplay muted loop id="hero-video" playsinline>
-        <source src="hero-video.mp4" type="video/mp4" />
-        Ваш браузер не поддерживает видео.
-      </video>
-      <div id="wallet-container"></div>
-    </section>
+<canvas id="particles"></canvas>
 
-    <section class="panel">
-      <h1>Blue Wallet</h1>
-      <p>Идеальный кожаный кошелек с 3D обзором</p>
-      <button id="orderBtn" class="btn">Заказать сейчас</button>
-      <p class="phone">📞 +7 (999) 123-45-67</p>
-      <button id="themeToggle" class="btn theme-btn">Тёмная тема</button>
-    </section>
-  </main>
+<header>
+  <h1>Blue Wallet</h1>
+  <p>Современный бизнес-кошелек вашего будущего</p>
+</header>
 
-  <!-- Модальное окно -->
-  <div id="orderModal" class="modal-back">
-    <div class="modal">
-      <button id="closeBtn" class="btn close">×</button>
-      <h2>Оформить заказ</h2>
-      <input type="text" id="name" placeholder="Ваше имя" />
-      <input type="tel" id="phone" placeholder="Телефон" />
-      <div class="actions">
-        <button id="sendBtn" class="btn">Отправить</button>
-        <button id="closeBtn2" class="btn close">Отмена</button>
-      </div>
-    </div>
+<div id="wallet-container"></div>
+
+<video id="hero-video" autoplay muted loop playsinline>
+  <source src="assets/hero-video.mp4" type="video/mp4" />
+  Ваш браузер не поддерживает видео.
+</video>
+
+<div class="phone" title="Кликните, чтобы скопировать номер">📞 +7 999 123-45-67</div>
+
+<button id="orderBtn">Заказать сейчас</button>
+
+<!-- Модальное окно заказа -->
+<div id="orderModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <h2>Оставьте заявку</h2>
+    <label for="name">Ваше имя:</label>
+    <input type="text" id="name" placeholder="Введите имя" />
+    <label for="phone">Телефон:</label>
+    <input type="tel" id="phone" placeholder="+7 999 123-45-67" />
+    <button id="sendBtn">Отправить</button>
   </div>
+</div>
 
-  <script src="three.min.js"></script>
-  <script src="gsap.min.js"></script>
-  <script src="main.js"></script>
-  <script src="service-worker.js"></script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+
+<script>
+  // Частицы на фоне
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  const particles = [];
+  const maxParticles = 120;
+
+  function resizeCanvas() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.radius = 1 + Math.random() * 2;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.speedY = (Math.random() - 0.5) * 0.5;
+      this.color = `rgba(51, 204, 255, ${0.3 + Math.random() * 0.7})`;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > width) this.speedX *= -1;
+      if (this.y < 0 || this.y > height) this.speedY *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.fillStyle = this.color;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles.length = 0;
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+    for (const p of particles) {
+      p.update();
+      p.draw();
+    }
+    requestAnimationFrame(animateParticles);
+  }
+
+  initParticles();
+  animateParticles();
+
+  // THREE.js 3D кошелек
+  const container = document.getElementById('wallet-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(0, 0, 5);
+
+  const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setClearColor(0x011c3f, 0); // прозрачный фон
+  container.appendChild(renderer.domElement);
+
+  // Свет
+  const ambientLight = new THREE.AmbientLight(0x3399ff, 0.8);
+  scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0x00ccff, 1);
+  pointLight.position.set(5,5,5);
+  scene.add(pointLight);
+
+  // Геометрия кошелька - простой прямоугольник с отделениями
+  const walletGroup = new THREE.Group();
+
+  const mainBody = new THREE.Mesh(
+    new THREE.BoxGeometry(3, 1.8, 0.3),
+    new THREE.MeshStandardMaterial({color: 0x0066cc, metalness:0.7, roughness:0.2})
+  );
+  walletGroup.add(mainBody);
+
+  for(let i=0; i<4; i++) {
+    let slot = new THREE.Mesh(
+      new THREE.BoxGeometry(0.6, 0.2, 0.31),
+      new THREE.MeshStandardMaterial({color: 0x004080, metalness:0.3, roughness:0.7})
+    );
+    slot.position.set(-1.1 + i*0.7, 0.5, 0);
+    walletGroup.add(slot);
+  }
+
+  scene.add(walletGroup);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    walletGroup.rotation.y += 0.005;
+    walletGroup.rotation.x = Math.sin(Date.now()*0.001)*0.05;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Обработка кнопок и модалки
+  const orderBtn = document.getElementById('orderBtn');
+  const modal = document.getElementById('orderModal');
+  const closeBtn = document.getElementById('closeBtn');
+  const sendBtn = document.getElementById('sendBtn');
+  const phoneDiv = document.querySelector('.phone');
+
+  phoneDiv.addEventListener('click', () => {
+    navigator.clipboard.writeText(phoneDiv.textContent.trim()).then(() => {
+      alert('Номер телефона скопирован в буфер обмена!');
+    });
+  });
+
+  orderBtn.addEventListener('click', () => {
+    modal.classList.add('active');
+  });
+  closeBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.classList.remove('active');
+  });
+
+  sendBtn.addEventListener('click', () => {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if(!name || !phone) {
+      alert('Пожалуйста, заполните все поля!');
+      return;
+    }
+    alert(`Спасибо, ${name}! Мы свяжемся с вами по номеру ${phone}.`);
+    modal.classList.remove('active');
+  });
