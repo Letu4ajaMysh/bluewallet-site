@@ -1,72 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BlueWallet — Ultra Premium</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blue Wallet — премиум кошелек</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <!-- VIDEO HERO: replace hero-video.mp4 with your file (webm/mp4) -->
-  <video id="heroVideo" class="hero-video" autoplay muted loop playsinline>
-    <source src="hero-video.mp4" type="video/mp4">
-    <!-- Fallback image shown if video not supported -->
-  </video>
-
-  <!-- Animated gradient + particles -->
-  <div id="gradient" aria-hidden="true"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
+  <canvas id="particles"></canvas>
 
   <main class="stage">
     <section class="visual">
-      <div class="wallet-wrap" id="walletWrap">
-        <div class="wallet" id="wallet">
-          <div class="img"><img src="hero.jpg" alt="Кошелек — изображение (замени на свое)" /></div>
-          <div class="gloss"></div>
-        </div>
-        <svg class="wallet-shadow" viewBox="0 0 100 20" preserveAspectRatio="none"><ellipse cx="50" cy="8" rx="50" ry="8" fill="rgba(0,20,50,0.6)"/></svg>
-      </div>
+      <video autoplay muted loop id="hero-video" playsinline>
+        <source src="assets/hero-video.mp4" type="video/mp4" />
+        Ваш браузер не поддерживает видео.
+      </video>
+      <div id="wallet-container"></div>
     </section>
 
-    <aside class="panel">
-      <h1>BlueWallet Ultra — Эксклюзив</h1>
-      <p class="lead">Ручная работа. Редкие материалы. Персональная сборка и гарантия. Эксклюзивные предложения для клиентов.</p>
-      <div class="price">Цена от <strong>€100 000</strong> — ограниченная серия</div>
-
-      <div class="ctas">
-        <button class="btn primary" id="orderBtn">🛒 Заказать</button>
-        <a class="btn ghost" href="tel:+7XXXXXXXXXX" id="callBtn">📞 Позвонить</a>
-        <a class="btn ghost" href="https://wa.me/7XXXXXXXXXX" target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a class="btn ghost" href="https://t.me/username" target="_blank" rel="noopener">✈️ Telegram</a>
-      </div>
-
-      <div class="meta">
-        <span class="badge">Ручная сборка</span>
-        <span class="badge">Гарантия</span>
-        <div class="vip">VIP: <strong>+7 999 123 45 67</strong></div>
-      </div>
-
-      <p class="foot">Полная персонализация, упаковка премиум и доставка. Свяжитесь с нами для индивидуального предложения.</p>
-    </aside>
+    <section class="panel">
+      <h1>Blue Wallet</h1>
+      <p>Идеальный кожаный кошелек с 3D обзором</p>
+      <button id="orderBtn" class="btn">Заказать сейчас</button>
+      <p class="phone">📞 +7 (999) 123-45-67</p>
+      <button id="themeToggle" class="btn theme-btn">Тёмная тема</button>
+    </section>
   </main>
 
-  <!-- Modal -->
-  <div class="modal-back" id="modal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h2 id="modalTitle">Оформить индивидуальный заказ</h2>
-      <p>Оставьте контакты, и мы подготовим персональное предложение.</p>
-      <div class="form-row">
-        <input id="name" placeholder="Ваше имя" />
-        <input id="phone" placeholder="Телефон" />
-      </div>
-      <textarea id="note" placeholder="Пожелания (цвет, гравировка)"></textarea>
+  <!-- Модальное окно -->
+  <div id="orderModal" class="modal-back">
+    <div class="modal">
+      <button id="closeBtn" class="btn close">×</button>
+      <h2>Оформить заказ</h2>
+      <input type="text" id="name" placeholder="Ваше имя" />
+      <input type="tel" id="phone" placeholder="Телефон" />
       <div class="actions">
-        <button class="btn ghost" id="closeModal">Отмена</button>
-        <button class="btn primary" id="sendOrder">Отправить заявку</button>
+        <button id="sendBtn" class="btn">Отправить</button>
+        <button id="closeBtn2" class="btn close">Отмена</button>
       </div>
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="service-worker.js"></script>
 </body>
 </html>
